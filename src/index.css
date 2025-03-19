@@ -15,10 +15,32 @@ ul {
   padding: 0;
   display: flex;
   list-style: none;
+  gap: 16px;
 }
 
 li {
-  margin-right: 16px;
+  padding: 16px;
+  background: #e3e3e3;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+li:hover {
+  background: #d1d1d1;
+}
+
+button {
+  margin-top: 16px;
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .mail-box {

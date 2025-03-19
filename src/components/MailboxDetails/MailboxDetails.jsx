@@ -1,29 +1,28 @@
+import { useParams, Link } from 'react-router-dom';
 
-// src/components/MailboxDetails/MailboxDetails.jsx
+const MailboxDetails = ({ mailboxes, deleteMailbox }) => {
+  const { mailboxId } = useParams();
+  const selectedBox = mailboxes.find((mailbox) => mailbox.id === Number(mailboxId));
 
-// const { mailboxId } = useParams();
-// const selectedBox = props.mailboxes.find((mailbox) => (
-//    mailbox._id === Number(mailboxId)
-// ));
+  if (!selectedBox) {
+    return <h2>Mailbox Not Found!</h2>;
+  }
 
-// src/components/MailboxDetails/MailboxDetails.jsx
-
-// const { mailboxId } = useParams();
-// const selectedLetters = props.letters.filter((letter) => (
-//   letter.mailboxId === Number(mailboxId)
-// ));
-
-
-
-const MailboxDetails = () => {
   return (
     <>
-    <h1>Mailbox Details</h1>
-    <ul>
-      
-    </ul>
+      <h1>Mailbox Details</h1>
+      <ul>
+        <li><strong>Box ID:</strong> {selectedBox.id}</li>
+        <li><strong>Owner:</strong> {selectedBox.sender}</li>
+        <li><strong>Subject:</strong> {selectedBox.subject}</li>
+        <li><strong>Content:</strong> {selectedBox.content}</li>
+      </ul>
+      <button onClick={() => deleteMailbox(selectedBox.id)}>Delete Mailbox</button>
+      <Link to="/mailboxes">
+        <button>Back to Mailboxes</button>
+      </Link>
     </>
-  )
-}
+  );
+};
 
 export default MailboxDetails;
