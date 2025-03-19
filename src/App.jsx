@@ -34,7 +34,7 @@ const App = () => {
         <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
         <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} />} />
         <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} deleteMailbox={deleteMailbox} />} />
-        <Route path="/mailboxes/:mailboxId/edit" element={() => <h2>Edit Mailbox</h2>} /> // This route doesn't exist in the current implementation, but it's a placeholder for future enhancements.
+        <Route path="/mailboxes/:mailboxId/edit" element={() => <h2>Edit Mailbox</h2>} /> 
 
       </Routes>
     </Router>

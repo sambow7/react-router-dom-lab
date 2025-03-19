@@ -18,6 +18,9 @@ const MailboxDetails = ({ mailboxes, deleteMailbox }) => {
         <li><strong>Content:</strong> {selectedBox.content}</li>
       </ul>
       <button onClick={() => deleteMailbox(selectedBox.id)}>Delete Mailbox</button>
+      <Link to={`/mailboxes/${selectedBox.id}/edit`}>
+        <button>Edit Mailbox</button>
+      </Link>
       <Link to="/mailboxes">
         <button>Back to Mailboxes</button>
       </Link>
