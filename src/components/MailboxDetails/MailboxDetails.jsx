@@ -1,3 +1,20 @@
+
+// src/components/MailboxDetails/MailboxDetails.jsx
+
+// const { mailboxId } = useParams();
+// const selectedBox = props.mailboxes.find((mailbox) => (
+//    mailbox._id === Number(mailboxId)
+// ));
+
+// src/components/MailboxDetails/MailboxDetails.jsx
+
+// const { mailboxId } = useParams();
+// const selectedLetters = props.letters.filter((letter) => (
+//   letter.mailboxId === Number(mailboxId)
+// ));
+
+
+
 const MailboxDetails = () => {
   return (
     <>
@@ -8,3 +25,5 @@ const MailboxDetails = () => {
     </>
   )
 }
+
+export default MailboxDetails;
