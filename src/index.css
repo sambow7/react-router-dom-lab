@@ -1,8 +1,21 @@
 /* Cyberpunk UI Theme */
 body {
-  background: radial-gradient(circle, #0f0f0f 30%, #1a1a1a 100%);
-  color: #0ff;
-  font-family: 'Orbitron', sans-serif;
+  background: url('/images/reactville-cyberpunk.png') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark transparency */
+  backdrop-filter: blur(4px); /* Cyberpunk glow effect */
+  -webkit-backdrop-filter: blur(4px); /* Safari compatibility */
+  z-index: -1;
 }
 
 /* Navigation */
@@ -18,11 +31,12 @@ nav a {
   color: #0ff;
   font-weight: bold;
   transition: 0.3s;
+  text-shadow: 0 0 15px #0ff; /* Increase glow effect */
 }
 
 nav a:hover {
   color: #f0f;
-  text-shadow: 0 0 10px #f0f;
+  text-shadow: 0 0 20px #f0f; /* Increase glow effect */
 }
 
 /* Buttons */
@@ -61,6 +75,16 @@ input:focus, select:focus, textarea:focus {
   outline: none;
 }
 
+/* Labels */
+label {
+  color: #0ff; /* Bright cyan */
+  font-weight: bold;
+  text-shadow: 0 0 10px #0ff; /* Glowing effect */
+  font-family: 'Orbitron', sans-serif;
+  display: block;
+  margin-bottom: 8px;
+}
+
 /* Mailbox & Letter Cards */
 .letter-list, .mailbox-list {
   display: grid;
@@ -87,4 +111,50 @@ input:focus, select:focus, textarea:focus {
 h1, h2 {
   text-shadow: 0 0 10px #0ff;
   color: #fff;
+}
+
+/* Mailbox List Links */
+.mailbox-list a {
+  color: #ff0; /* Bright yellow for contrast */
+  text-shadow: 0 0 20px #ff0, 0 0 40px #ff0; /* Enhanced glow effect */
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.mailbox-list a:hover {
+  color: #f0f;
+  text-shadow: 0 0 25px #f0f, 0 0 50px #f0f;
+}
+
+/* Home Page Styling */
+.home-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  z-index: 2; /* Ensure it's above the background */
+}
+
+.home-button {
+  padding: 20px 40px;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid #0ff;
+  background: rgba(0, 0, 0, 0.6);
+  color: #0ff;
+  text-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+  box-shadow: 0 0 15px #0ff;
+  text-decoration: none;
+}
+
+.home-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
+  box-shadow: 0 0 20px #f0f;
+  color: #f0f;
 }

@@ -1,7 +1,5 @@
-// src/App.jsx
-
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 import NavBar from "./components/NavBar/NavBar";
@@ -28,17 +26,17 @@ const App = () => {
       setMailbox(storedMailboxes);
     }
   }, []);
-  
+
   const updateMailboxStorage = (newMailboxes) => {
     setMailbox(newMailboxes);
     localStorage.setItem("mailboxes", JSON.stringify(newMailboxes));
   };
-  
+
   const addMailbox = (newMailbox) => {
     const newMailboxes = [...mailbox, { id: mailbox.length + 1, ...newMailbox }];
     updateMailboxStorage(newMailboxes);
   };
-  
+
   const deleteMailbox = (mailboxId) => {
     const newMailboxes = mailbox.filter((box) => box.id !== mailboxId);
     updateMailboxStorage(newMailboxes);
@@ -56,7 +54,16 @@ const App = () => {
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<h1>Post Office</h1>} />
+        <Route
+          path="/"
+          element={
+            <div className="home-container">
+              <Link to="/mailboxes" className="home-button">
+                Enter Post Office
+              </Link>
+            </div>
+          }
+        />
         <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
         <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
         <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} letters={letters} deleteMailbox={deleteMailbox} />} />
