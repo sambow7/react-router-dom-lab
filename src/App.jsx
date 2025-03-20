@@ -15,7 +15,6 @@ const initialState = [
   { id: 3, subject: "Payment Reminder", sender: "Mike Johnson", content: "Is this working?" },
 ];
 
-
 const App = () => {
   const [mailbox, setMailbox] = useState(initialState);
   const [letters, setLetters] = useState([]); // ✅ New state for letters
@@ -32,14 +31,35 @@ const App = () => {
     localStorage.setItem("mailboxes", JSON.stringify(newMailboxes));
   };
 
+  const generateUniqueId = () => {
+    // Retrieve stored mailboxes from localStorage
+    const storedMailboxes = JSON.parse(localStorage.getItem("mailboxes")) || [];
+    // Combine stored mailboxes with current state
+    const allMailboxes = [...storedMailboxes, ...mailbox];
+  
+    // Find the highest existing id and increment it
+    const newId = allMailboxes.length > 0
+      ? Math.max(...allMailboxes.map(box => box.id)) + 1
+      : 1;
+      // Return the new unique ID
+    return newId;
+  };
+
+
   const addMailbox = (newMailbox) => {
-    const newMailboxes = [...mailbox, { id: mailbox.length + 1, ...newMailbox }];
-    updateMailboxStorage(newMailboxes);
+    const newId = generateUniqueId(); // Ensure unique ID assignment
+    const updatedMailboxes = [...mailbox, { id: newId, ...newMailbox }];
+    updateMailboxStorage(updatedMailboxes);
+
+    setMailbox(updatedMailboxes);
+    localStorage.setItem("mailboxes", JSON.stringify(updatedMailboxes));
+
+    console.log("Updated Mailboxes:", updatedMailboxes); // ✅ Debugging log
   };
 
   const deleteMailbox = (mailboxId) => {
-    const newMailboxes = mailbox.filter((box) => box.id !== mailboxId);
-    updateMailboxStorage(newMailboxes);
+    const updatedMailboxes = mailbox.filter((box) => box.id !== mailboxId);
+    updateMailboxStorage(updatedMailboxes); // ✅ Use updateMailboxStorage here
   };
 
   const editMailbox = (updatedMailbox) => {
@@ -47,31 +67,41 @@ const App = () => {
   };
 
   const addLetter = (newLetter) => {
-    setLetters([...letters, newLetter]);
+    const updatedLetters = [...letters, newLetter];
+    setLetters(updatedLetters);
+    localStorage.setItem("letters", JSON.stringify(updatedLetters));
   };
 
   return (
     <Router>
-    <Routes>
-      <Route path="/" element={
-        <div className="home-container">
-          <Link to="/mailboxes" className="home-button">Enter Post Office</Link>
-        </div>
-      } />
-      <Route path="*" element={
-        <>
-          <NavBar />
-          <Routes>
-            <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
-            <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
-            <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} />} />
-            <Route path="/mailboxes/:mailboxId/edit" element={<MailboxEdit mailboxes={mailbox} editMailbox={editMailbox} />} />
-            <Route path="/new-letter" element={<LetterForm mailboxes={mailbox} addLetter={addLetter} />} />
-          </Routes>
-        </>
-      } />
-    </Routes>
-  </Router>
+      <Routes>
+        <Route path="/" element={
+          <div className="home-container">
+            <Link to="/mailboxes" className="home-button">Enter Post Office</Link>
+          </div>
+        } />
+        <Route path="*" element={
+          <>
+            <NavBar />
+            <Routes>
+              <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
+              <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
+              <Route path="/mailboxes/:mailboxId" element={<MailboxDetails
+                mailboxes={mailbox}
+                letters={letters}
+                deleteMailbox={(id) => {
+                  if (window.confirm("Are you sure you want to delete this mailbox?")) {
+                    deleteMailbox(id);
+                  }
+                }}
+              />} />
+              <Route path="/mailboxes/:mailboxId/edit" element={<MailboxEdit mailboxes={mailbox} editMailbox={editMailbox} />} />
+              <Route path="/new-letter" element={<LetterForm mailboxes={mailbox} addLetter={addLetter} />} />
+            </Routes>
+          </>
+        } />
+      </Routes>
+    </Router>
   );
 };
 

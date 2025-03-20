@@ -49,24 +49,33 @@ button {
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s; /* Added transform for smoother animation */
   box-shadow: 0px 0px 10px #0ff;
 }
 
 button:hover {
   background: linear-gradient(90deg, #f0f, #0ff);
   box-shadow: 0px 0px 15px #f0f;
+  transform: scale(1.05); /* Added scale effect on hover */
 }
 
 /* Input Fields */
 input, select, textarea {
   width: 100%;
+  max-width: 90%;
   padding: 12px;
   border: 2px solid #0ff;
   background: #111;
   color: #0ff;
   font-family: 'Orbitron', sans-serif;
   box-shadow: 0 0 8px #0ff;
+  box-sizing: border-box;
+  display: block;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -126,6 +135,28 @@ h1, h2 {
   text-shadow: 0 0 25px #f0f, 0 0 50px #f0f;
 }
 
+.mailbox-list ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+
+.mailbox-list li {
+  background: rgba(0, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px #0ff;
+  transition: transform 0.3s ease;
+}
+
+.mailbox-list li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #f0f;
+}
+
 /* Home Page Styling */
 .home-container {
   position: relative;
@@ -157,4 +188,21 @@ h1, h2 {
   text-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
   box-shadow: 0 0 20px #f0f;
   color: #f0f;
+}
+
+/* Mailbox Details List Item Styling */
+li {
+  color: #0ff;
+  font-weight: bold;
+  text-shadow: 0 0 10px #0ff; /* Neon glow effect */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.letter-list p {
+  color: #fff; /* Ensure text color for letter section */
+  text-shadow: 0 0 10px #000; /* Ensure text visibility with shadow */
 }
