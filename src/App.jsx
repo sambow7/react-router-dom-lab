@@ -52,25 +52,26 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="home-container">
-              <Link to="/mailboxes" className="home-button">
-                Enter Post Office
-              </Link>
-            </div>
-          }
-        />
-        <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
-        <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
-        <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} letters={letters} deleteMailbox={deleteMailbox} />} />
-        <Route path="/mailboxes/:mailboxId/edit" element={<MailboxEdit mailboxes={mailbox} editMailbox={editMailbox} />} />
-        <Route path="/new-letter" element={<LetterForm mailboxes={mailbox} addLetter={addLetter} />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={
+        <div className="home-container">
+          <Link to="/mailboxes" className="home-button">Enter Post Office</Link>
+        </div>
+      } />
+      <Route path="*" element={
+        <>
+          <NavBar />
+          <Routes>
+            <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
+            <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
+            <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} />} />
+            <Route path="/mailboxes/:mailboxId/edit" element={<MailboxEdit mailboxes={mailbox} editMailbox={editMailbox} />} />
+            <Route path="/new-letter" element={<LetterForm mailboxes={mailbox} addLetter={addLetter} />} />
+          </Routes>
+        </>
+      } />
+    </Routes>
+  </Router>
   );
 };
 
