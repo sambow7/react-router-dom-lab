@@ -1,73 +1,90 @@
-/* src/index.css */
-
+/* Cyberpunk UI Theme */
 body {
-  padding: 16px;
+  background: radial-gradient(circle, #0f0f0f 30%, #1a1a1a 100%);
+  color: #0ff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Navigation */
+nav ul {
   display: flex;
-  flex-direction: column;
-}
-
-#root {
-  width: 100%;
-  height: 100%;
-}
-
-ul {
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
   list-style: none;
-  gap: 16px;
+  justify-content: center;
 }
 
-li {
-  padding: 16px;
-  background: #e3e3e3;
-  border-radius: 8px;
+nav a {
+  text-decoration: none;
+  color: #0ff;
+  font-weight: bold;
   transition: 0.3s;
-  text-align: center;
-  font-size: 1.1rem;
 }
 
-li:hover {
-  background: #d1d1d1;
+nav a:hover {
+  color: #f0f;
+  text-shadow: 0 0 10px #f0f;
 }
 
+/* Buttons */
 button {
-  margin-top: 16px;
-  padding: 10px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border: 2px solid #0ff;
+  background: linear-gradient(90deg, #0ff, #f0f);
+  color: #000;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 0px 10px #0ff;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #f0f, #0ff);
+  box-shadow: 0px 0px 15px #f0f;
 }
 
-.mail-box {
-  border: 2px solid white;
+/* Input Fields */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #0ff;
+  background: #111;
+  color: #0ff;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 8px #0ff;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #f0f;
+  box-shadow: 0 0 15px #f0f;
+  outline: none;
+}
+
+/* Mailbox & Letter Cards */
+.letter-list, .mailbox-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
   padding: 20px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+.letter-card, .mailbox-card {
+  background: rgba(20, 20, 20, 0.8);
+  border: 2px solid #0ff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #0ff;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-label,
-button {
-  margin: 16px 0px;
-  font-weight: bold;
+.letter-card:hover, .mailbox-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #f0f;
 }
 
-input,
-select,
-textarea {
-  padding: 8px;
-}
-
-button {
-  background-color: #535bf2;
+/* Headings */
+h1, h2 {
+  text-shadow: 0 0 10px #0ff;
+  color: #fff;
 }
