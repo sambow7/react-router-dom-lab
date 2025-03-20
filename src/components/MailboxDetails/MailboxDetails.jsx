@@ -9,8 +9,9 @@ const MailboxDetails = ({ mailboxes, letters, deleteMailbox }) => {
   }
 
   const selectedBox = mailboxes.find((mailbox) => mailbox.id === Number(mailboxId));
-
-  const selectedLetters = (letters || []).filter((letter) => Number(letter.mailboxId) === Number(mailboxId));
+  console.log("Mailbox Details Props - Letters:", letters);
+  const selectedLetters = letters?.filter(letter => Number(letter.mailboxId) === Number(mailboxId)) || [];
+  console.log("Filtered Letters:", selectedLetters);
 
   if (!selectedBox) {
     return <h2>Mailbox Not Found!</h2>;

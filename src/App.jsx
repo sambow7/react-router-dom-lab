@@ -24,6 +24,11 @@ const App = () => {
     if (storedMailboxes) {
       setMailbox(storedMailboxes);
     }
+  
+    const storedLetters = JSON.parse(localStorage.getItem("letters"));
+    if (storedLetters) {
+      setLetters(storedLetters);
+    }
   }, []);
 
   const updateMailboxStorage = (newMailboxes) => {
@@ -53,8 +58,6 @@ const App = () => {
 
     setMailbox(updatedMailboxes);
     localStorage.setItem("mailboxes", JSON.stringify(updatedMailboxes));
-
-    console.log("Updated Mailboxes:", updatedMailboxes); // ✅ Debugging log
   };
 
   const deleteMailbox = (mailboxId) => {
@@ -69,7 +72,8 @@ const App = () => {
   const addLetter = (newLetter) => {
     const updatedLetters = [...letters, newLetter];
     setLetters(updatedLetters);
-    localStorage.setItem("letters", JSON.stringify(updatedLetters));
+    localStorage.setItem("letters", JSON.stringify(updatedLetters)); // ✅ Save letters
+    console.log("Updated Letters in Local Storage:", updatedLetters);
   };
 
   return (
@@ -86,10 +90,7 @@ const App = () => {
             <Routes>
               <Route path="/mailboxes" element={<MailboxList mailbox={mailbox} />} />
               <Route path="/new-mailbox" element={<MailboxForm addMailbox={addMailbox} />} />
-              <Route path="/mailboxes/:mailboxId" element={<MailboxDetails
-                mailboxes={mailbox}
-                letters={letters}
-                deleteMailbox={(id) => {
+              <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailbox} letters={letters} deleteMailbox={(id) => {
                   if (window.confirm("Are you sure you want to delete this mailbox?")) {
                     deleteMailbox(id);
                   }

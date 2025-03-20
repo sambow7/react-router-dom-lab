@@ -10,9 +10,7 @@ const MailboxForm = ({ addMailbox }) => {
     e.preventDefault();
     const newMailbox = { sender: boxOwner, size: boxSize };
 
-    console.log("New Mailbox Created:", newMailbox); // ✅ Debugging log
-
-    addMailbox(newMailbox); // Send new mailbox data to App.jsx
+    addMailbox(newMailbox);
 
     navigate("/mailboxes");
 
